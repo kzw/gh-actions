@@ -1,8 +1,8 @@
 name: changed file by folder
 description: return number of changed files
 inputs:
-  folder: path to the folder to measure
-    description: relative from the root of the folder
+  folder:
+    description: folder path relative from the root of the folder
     required: true
     default: .
 outputs:
