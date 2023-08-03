@@ -6,9 +6,9 @@ inputs:
     required: true
     default: .
 outputs:
-  number:
+  file-count:
     description: number of files affected
-    value: ${{ steps.count-file.outputs.file_count }}
+    value: ${{ steps.count-file.outputs.file-count }}
 runs:
   using: "composite"
   steps:
