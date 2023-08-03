@@ -18,4 +18,5 @@ runs:
         git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +8d6af6bc7a400bc9acbe36e43d09628af305cc15:refs/remotes/origin/main
         git diff --name-only origin/main ${{ inputs.folder }}|wc -l
         echo "file_count=$(git diff --name-only origin/main ${{ inputs.folder }}|wc -l)" >> $GITHUB_OUTPUT
+        cat $GITHUB_OUTPUT
       shell: bash
