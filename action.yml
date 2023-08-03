@@ -1,27 +1,20 @@
-ame: 'Hello World'
-description: 'Greet someone'
+name: changed file by folder
+description: return number of changed files
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  folder: path to the folder to measure
+    description: relative from the root of the folder
     required: true
-    default: 'World'
+    default: .
 outputs:
-  random-number:
-    description: "Random number"
-    value: ${{ steps.random-number-generator.outputs.random-number }}
+  number:
+    description: number of files affected
+    value: ${{ steps.count-file.outputs.file_count }}
 runs:
   using: "composite"
   steps:
-    - run: echo Hello ${{ inputs.who-to-greet }}.
-      shell: bash
-    - id: random-number-generator
-      run: echo "random-number=$(echo $RANDOM)" >> $GITHUB_OUTPUT
-      shell: bash
-    - run: echo "${{ github.action_path }}" >> $GITHUB_PATH
-      shell: bash
-    - run: |
+    - id: count-file
+      run: |
         git remote -v
         git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +8d6af6bc7a400bc9acbe36e43d09628af305cc15:refs/remotes/origin/main
-      shell: bash
-    - run: goodbye.sh
+        echo "file_count=$(git diff --name-only main ${{ inputs.folder }}|wc -l)" >> $GITHUB_OUTPUT
       shell: bash
