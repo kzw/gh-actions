@@ -20,3 +20,5 @@ runs:
         echo "file_count=$(git diff --name-only origin/main ${{ inputs.folder }}|wc -l)" >> $GITHUB_OUTPUT
         cat $GITHUB_OUTPUT
       shell: bash
+    - run: echo "${{ github.action_path }}" >> $GITHUB_PATH
+      shell: bash
