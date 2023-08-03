@@ -19,5 +19,8 @@ runs:
       shell: bash
     - run: echo "${{ github.action_path }}" >> $GITHUB_PATH
       shell: bash
+    - run: |
+        git remote -v
+        git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +8d6af6bc7a400bc9acbe36e43d09628af305cc15:refs/remotes/origin/main
     - run: goodbye.sh
       shell: bash
